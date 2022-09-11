@@ -29,8 +29,8 @@
         camera.width = window.innerWidth
         camera.height = window.innerHeight
 
-        rosto.width = "400"
-        rosto.height = "300"
+        rosto.width = window.innerWidth
+        rosto.height = window.innerHeight
     }, true);
 
     if (navigator.mediaDevices.getUserMedia) {
@@ -78,7 +78,7 @@
                 rostoCtx.fillStyle = hex;
 
                 //desenhar
-                rostoCtx.font = `${unidade}px Arial bold`;
+                rostoCtx.font = `${unidade}px Arial`;
                 rostoCtx.fillText(letra, x, y);
             }
         }
