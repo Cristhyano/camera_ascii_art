@@ -48,9 +48,12 @@
 
     const alfabeto = asciiB.split("")
 
-    const unidade = window.innerWidth > window.innerHeight ?
-        (5 / 100) * window.innerHeight :
-        (5 / 100) * window.innerWidth;
+    const unidade = 20;
+    /*
+    window.innerWidth > window.innerHeight ?
+    (5 / 100) * window.innerHeight :
+    (5 / 100) * window.innerWidth; 
+    */
 
     setInterval(() => {
         const context = rosto.getContext('2d');
