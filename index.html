@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rosto</title>
+    <title>ASCII</title>
     <style>
         * {
             padding: 0;
@@ -25,11 +25,13 @@
     const camera = document.querySelector('#camera');
     const rosto = document.querySelector('#rosto');
 
-    camera.width = window.innerWidth
-    camera.height = window.innerHeight
+    window.addEventListener('resize', function (event) {
+        camera.width = window.innerWidth
+        camera.height = window.innerHeight
 
-    rosto.width = window.innerWidth
-    rosto.height = window.innerHeight
+        rosto.width = window.innerWidth
+        rosto.height = window.innerHeight
+    }, true);
 
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -46,7 +48,12 @@
 
     const alfabeto = asciiB.split("")
 
-    const unidade = 0.010 * camera.width;
+    const unidade = 15;
+    /*
+    window.innerWidth > window.innerHeight ?
+    (5 / 100) * window.innerHeight :
+    (5 / 100) * window.innerWidth; 
+    */
 
     setInterval(() => {
         const context = rosto.getContext('2d');
@@ -67,8 +74,8 @@
                 const index = Math.ceil(luminosidade / 25)
 
                 let letra = alfabeto[index]
-                rostoCtx.fillStyle = "#fff" + index;
-                // rostoCtx.fillStyle = hex;
+                // rostoCtx.fillStyle = "#fff" + index;
+                rostoCtx.fillStyle = hex;
 
                 //desenhar
                 rostoCtx.font = `${unidade}px Arial`;
