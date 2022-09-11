@@ -21,21 +21,16 @@
 </body>
 
 <script>
-    const widnow = {
-        innerWidth: 960,
-        innerHeight: 540
-    }
-
     const video = document.querySelector("#video");
     const camera = document.querySelector('#camera');
     const rosto = document.querySelector('#rosto');
 
     window.addEventListener('resize', function (event) {
-        camera.width = widnow.innerWidth
-        camera.height = widnow.innerHeight
+        camera.width = window.innerWidth
+        camera.height = window.innerHeight
 
-        rosto.width = widnow.innerWidth
-        rosto.height = widnow.innerHeight
+        rosto.width = window.innerWidth
+        rosto.height = window.innerHeight
     }, true);
 
     if (navigator.mediaDevices.getUserMedia) {
@@ -55,9 +50,9 @@
 
     const unidade = 15;
     /*
-    widnow.innerWidth > widnow.innerHeight ?
-    (5 / 100) * widnow.innerHeight :
-    (5 / 100) * widnow.innerWidth; 
+    window.innerWidth > window.innerHeight ?
+    (5 / 100) * window.innerHeight :
+    (5 / 100) * window.innerWidth; 
     */
 
     setInterval(() => {
