@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosto</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body style="display: flex; flex-direction: row; justify-content: center; background-color: #222;">
+    <video id="video" autoplay="true" hidden></video>
+    <canvas id="camera" hidden></canvas>
+    <canvas id="rosto"></canvas>
+</body>
+
+<script>
+    const video = document.querySelector("#video");
+    const camera = document.querySelector('#camera');
+    const rosto = document.querySelector('#rosto');
+
+    camera.width = window.innerWidth
+    camera.height = window.innerHeight
+
+    rosto.width = window.innerWidth
+    rosto.height = window.innerHeight
+
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                video.srcObject = stream;
+            })
+            .catch(function (err0r) {
+                console.log("Something went wrong!");
+            });
+    }
+
+    const asciiA = `$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^\`'. `
+    const asciiB = `" .:-=+*#%@"`
+
+    const alfabeto = asciiB.split("")
+
+    const unidade = 0.010 * camera.width;
+
+    setInterval(() => {
+        const context = rosto.getContext('2d');
+        context.clearRect(0, 0, rosto.width, rosto.height);
+
+        const ctx = camera.getContext('2d').drawImage(video, 0, 0, camera.width, camera.height);
+
+        for (let x = 0; x < camera.width; x = x + unidade) {
+            for (let y = 0; y < camera.height; y = y + unidade) {
+                const cameraCtx = camera.getContext('2d');
+                const p = cameraCtx.getImageData(x, y, unidade, unidade).data;
+
+                const luminosidade = (0.299 * p[0] + 0.587 * p[1] + 0.114 * p[2]);
+                const hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+
+                const rostoCtx = rosto.getContext('2d');
+
+                const index = Math.ceil(luminosidade / 25)
+
+                let letra = alfabeto[index]
+                rostoCtx.fillStyle = "#fff" + index;
+                // rostoCtx.fillStyle = hex;
+
+                //desenhar
+                rostoCtx.font = `${unidade}px Arial`;
+                rostoCtx.fillText(letra, x, y);
+            }
+        }
+    }, 1);
+
+    function mensagem() {
+        if (y == 350) {
+            const mensagem = "Mensagem escondida dentro do vídeo hahahahahahahahah"
+
+            const mostra = Math.random() > 0.5;
+
+            if (mostra) {
+                const lista = mensagem.split("");
+                const novaLetra = lista[x / unidade]
+
+                letra = novaLetra || x;
+            };
+        }
+    }
+
+    function rgbToHex(r, g, b) {
+        if (r > 255 || g > 255 || b > 255)
+            throw "Invalid color component";
+        return ((r << 16) | (g << 8) | b).toString(16);
+    }
+</script>
+
+</html>
