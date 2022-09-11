@@ -46,7 +46,8 @@
 
     const alfabeto = asciiB.split("")
 
-    const unidade = (5/100) * camera.width;
+    const unidadeX = (5/100) * camera.width;
+    const unidadeY = (5/100) * camera.height;
 
     setInterval(() => {
         const context = rosto.getContext('2d');
@@ -54,10 +55,10 @@
 
         const ctx = camera.getContext('2d').drawImage(video, 0, 0, camera.width, camera.height);
 
-        for (let x = 0; x < camera.width; x = x + unidade) {
-            for (let y = 0; y < camera.height; y = y + unidade) {
+        for (let x = 0; x < camera.width; x = x + unidadeX) {
+            for (let y = 0; y < camera.height; y = y + unidadeY) {
                 const cameraCtx = camera.getContext('2d');
-                const p = cameraCtx.getImageData(x, y, unidade, unidade).data;
+                const p = cameraCtx.getImageData(x, y, unidadeX, unidadeY).data;
 
                 const luminosidade = (0.299 * p[0] + 0.587 * p[1] + 0.114 * p[2]);
                 const hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
@@ -71,7 +72,7 @@
                 // rostoCtx.fillStyle = hex;
 
                 //desenhar
-                rostoCtx.font = `${unidade}px Arial`;
+                rostoCtx.font = `${unidadeX}px Arial`;
                 rostoCtx.fillText(letra, x, y);
             }
         }
