@@ -80,6 +80,9 @@
                 //desenhar
                 rostoCtx.font = `${unidade}px Arial`;
                 rostoCtx.fillText(letra, x, y);
+
+                rostoCtx.fillStyle = "white";
+                rostoCtx.fillRect(x, y, unidade, unidade)
             }
         }
     }, 1);
