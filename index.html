@@ -25,11 +25,13 @@
     const camera = document.querySelector('#camera');
     const rosto = document.querySelector('#rosto');
 
-    camera.width = window.innerWidth
-    camera.height = window.innerHeight
+    window.addEventListener('resize', function (event) {
+        camera.width = window.innerWidth
+        camera.height = window.innerHeight
 
-    rosto.width = window.innerWidth
-    rosto.height = window.innerHeight
+        rosto.width = window.innerWidth
+        rosto.height = window.innerHeight
+    }, true);
 
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -46,7 +48,7 @@
 
     const alfabeto = asciiB.split("")
 
-    const unidade = (5/100) * window.innerWidth;
+    const unidade = (5 / 100) * window.innerWidth;
 
     setInterval(() => {
         const context = rosto.getContext('2d');
