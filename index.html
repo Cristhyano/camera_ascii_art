@@ -25,13 +25,14 @@
     const camera = document.querySelector('#camera');
     const rosto = document.querySelector('#rosto');
 
-    window.addEventListener('resize', function (event) {
+    /*window.addEventListener('resize', function (event) {
         camera.width = window.innerWidth
         camera.height = window.innerHeight
 
         rosto.width = window.innerWidth
         rosto.height = window.innerHeight
     }, true);
+    */
 
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
